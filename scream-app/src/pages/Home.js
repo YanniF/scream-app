@@ -26,7 +26,7 @@ class Home extends Component {
 		return (
 			<Grid container spacing={3}>
 				<Grid item sm={8} xs={12}>
-					{screams ? screams.map((scream) => <Scream key={Math.random()} scream={scream} />) : <p>Loading...</p>}
+					{screams ? screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) : <p>Loading...</p>}
 				</Grid>
 				<Grid item sm={4} xs={12}>
 					profile

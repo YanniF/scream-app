@@ -8,6 +8,8 @@
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
 		"axios": "^0.19.2",
+		"dayjs": "^1.8.20",
+		"jwt-decode": "^2.2.0",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-router-dom": "^5.1.2",
@@ -23,8 +25,16 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"proxy": "https://europe-west1-yanni-scream.cloudfunctions.net/api"
 }
