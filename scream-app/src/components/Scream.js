@@ -21,7 +21,8 @@ const styles = {
 };
 
 const Scream = (props) => {
-	const { classes, scream: { body, createdAt, userImage, userHandle, screamId, likeCount, CommentCount } } = props;
+	// const { classes, scream: { body, createdAt, userImage, userHandle, screamId, likeCount, CommentCount } } = props;
+	const { classes, scream: { body, createdAt, userImage, userHandle } } = props;
 	dayjs.extend(relativeTime);
 
 	return (

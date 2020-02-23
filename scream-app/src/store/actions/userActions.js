@@ -5,7 +5,7 @@ import {
 	LOADING_UI,
 	SET_UNAUTHENTICATED,
 	LOADING_USER,
-	MARK_NOTIFICATIONS_READ,
+	// MARK_NOTIFICATIONS_READ,
 } from '../types';
 
 import axios from 'axios';

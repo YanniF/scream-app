@@ -3,9 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 import store from './store/store';
 import { SET_AUTHENTICATED } from './store/types';
+import { logoutUser, getUserData } from './store/actions/userActions';
+
 import AuthRoute from './util/AuthRoute';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -16,7 +19,8 @@ import './App.css';
 import themeObject from './util/theme';
 
 const theme = createMuiTheme(themeObject);
-let authenticated;
+
+axios.defaults.baseURL = 'https://europe-west1-yanni-scream.cloudfunctions.net/api';
 
 const token = localStorage.FBIdToken;
 
@@ -24,11 +28,14 @@ if (token) {
 	const decodedToken = jwtDecode(token);
 
 	if (decodedToken.exp * 1000 < Date.now()) {
-		authenticated = false;
+		store.dispatch(logoutUser());
 		window.location.href = '/login';
 	}
 	else {
-		authenticated = true;
+		// move to actions
+		store.dispatch({ type: SET_AUTHENTICATED });
+		axios.defaults.headers.common['Authorization'] = token;
+		store.dispatch(getUserData());
 	}
 }
 
@@ -42,8 +49,8 @@ class App extends Component {
 						<div className="container">
 							<Switch>
 								<Route path="/" exact component={Home} />
-								<AuthRoute exact path="/login" component={Login} authenticated={authenticated} />
-								<AuthRoute exact path="/signup" component={Signup} authenticated={authenticated} />
+								<AuthRoute exact path="/login" component={Login} />
+								<AuthRoute exact path="/signup" component={Signup} />
 							</Switch>
 						</div>
 					</BrowserRouter>
