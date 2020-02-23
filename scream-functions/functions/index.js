@@ -3,6 +3,9 @@ const fbAuth = require('./util/fbAuth');
 const app = require('express')();
 const { db } = require('./util/admin');
 
+const cors = require('cors');
+app.use(cors());
+
 const {
 	getAllScreams,
 	postScream,

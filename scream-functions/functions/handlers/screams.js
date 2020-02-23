@@ -13,7 +13,7 @@ exports.getAllScreams = (req, res) => {
 					screamId: doc.id,
 					body: doc.data().body,
 					userHandle: doc.data().userHandle,
-					createdAt: doc.data().createAt,
+					createdAt: doc.data().createdAt,
 					userImage: doc.data().userImage,
 				});
 			});
@@ -84,7 +84,6 @@ exports.getScream = (req, res) => {
 };
 
 exports.deleteScream = (req, res) => {
-	// TODO: delete comments and likes from deleted screams
 	const document = db.doc(`/screams/${req.params.screamId}`);
 
 	document
