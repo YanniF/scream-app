@@ -65,9 +65,9 @@ class PostScream extends Component {
 }
 
 PostScream.propTypes = {
-  postScream: PropTypes.func.isRequired,
-  clearErrors: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
+  // postScream: PropTypes.func.isRequired,
+  // clearErrors: PropTypes.func.isRequired,
+  // UI: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
