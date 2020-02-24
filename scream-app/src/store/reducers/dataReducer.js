@@ -4,8 +4,8 @@ import {
   SET_SCREAM,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
-  // DELETE_SCREAM,
-  // POST_SCREAM,
+  DELETE_SCREAM,
+  POST_SCREAM,
   // SUBMIT_COMMENT
 } from "../types";
 
@@ -46,6 +46,22 @@ export default function(state = initialState, action) {
         ...state,
       }
     }
+    case DELETE_SCREAM: {
+      let index = state.screams.findIndex(scream => scream.screamId === action.payload)
+      state.screams.splice(index, 1)
+
+      return {
+        ...state,
+      }
+    }
+    case POST_SCREAM:
+      return {
+        ...state,
+        screams: [
+          action.payload,
+          ...state.screams
+        ]
+      };
     default:
       return state;
   }

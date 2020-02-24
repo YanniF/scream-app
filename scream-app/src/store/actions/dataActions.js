@@ -3,11 +3,11 @@ import {
   SET_SCREAMS,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
-  // DELETE_SCREAM,
-  // SET_ERRORS,
-  // POST_SCREAM,
-  // CLEAR_ERRORS,
-  // LOADING_UI,
+  DELETE_SCREAM,
+  LOADING_UI,
+  POST_SCREAM,
+  SET_ERRORS,
+  CLEAR_ERRORS,
   // SET_SCREAM,
   // STOP_LOADING_UI,
   // SUBMIT_COMMENT
@@ -47,3 +47,28 @@ export const unlikeScream = (screamId) => (dispatch) => {
     console.error(err)
   });
 }
+
+export const postScream = (newScream) => (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  axios.post('/scream', newScream)
+  .then(res => {
+    dispatch({ type: POST_SCREAM, payload: res.data })
+    dispatch({ type: CLEAR_ERRORS })
+  })
+  .catch((err) => {
+    dispatch({ type: SET_ERRORS, payload: err.response.data })
+  });
+}
+
+export const deleteScream = (screamId) => (dispatch) => {
+  axios.delete(`/scream/${screamId}`)
+  .then(() => {
+    dispatch({ type: DELETE_SCREAM, payload: screamId })
+  })
+  .catch(err => console.error(err))
+}
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
+};
