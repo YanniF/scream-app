@@ -10,7 +10,7 @@ import { SET_AUTHENTICATED } from './store/types';
 import { logoutUser, getUserData } from './store/actions/userActions';
 
 import AuthRoute from './util/AuthRoute';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
