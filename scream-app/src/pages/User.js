@@ -6,8 +6,8 @@ import Grid from '@material-ui/core/Grid';
 
 import Scream from '../components/screams/Scream';
 import StaticProfile from '../components/profile/StaticProfile';
-// import ScreamSkeleton from '../util/ScreamSkeleton';
-// import ProfileSkeleton from '../util/ProfileSkeleton';
+import ScreamSkeleton from '../util/ScreamSkeleton';
+import ProfileSkeleton from '../util/ProfileSkeleton';
 import { getUserData } from '../store/actions/dataActions';
 
 class user extends Component {
@@ -39,28 +39,18 @@ class user extends Component {
 		const { screams, loading } = this.props.data;
 		const { screamIdParam } = this.state;
 
-		let screamsMarkup;
-
-		if (loading) {
-			// screamsMarkup = <ScreamSkeleton />
-			screamsMarkup = <div>ScreamSkeleton</div>;
-		}
-		else if (screams === null) {
-			screamsMarkup = <p>No screams from this user</p>;
-		}
-		else if (!screamIdParam) {
-			screamsMarkup = screams.map((scream) => <Scream key={scream.screamId} scream={scream} />);
-		}
-		else {
+		const screamsMarkup = loading ? (
+			<ScreamSkeleton />
+		) : screams === null ? (
+			<p>No screams from this user</p>
+		) : !screamIdParam ? (
+			screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+		) : (
 			screams.map((scream) => {
-				if (scream.screamId !== screamIdParam) {
-					return <Scream key={scream.screamId} scream={scream} />;
-				}
-				else {
-					return <Scream key={scream.screamId} scream={scream} openDialog />;
-				}
-			});
-		}
+				if (scream.screamId !== screamIdParam) return <Scream key={scream.screamId} scream={scream} />;
+				else return <Scream key={scream.screamId} scream={scream} openDialog />;
+			})
+		);
 
 		return (
 			<Grid container spacing={4}>
@@ -68,12 +58,7 @@ class user extends Component {
 					{screamsMarkup}
 				</Grid>
 				<Grid item sm={4} xs={12}>
-					{this.state.profile === null ? (
-						// <ProfileSkeleton />
-						<div>ProfileSkeleton</div>
-					) : (
-						<StaticProfile profile={this.state.profile} />
-					)}
+					{this.state.profile === null ? <ProfileSkeleton /> : <StaticProfile profile={this.state.profile} />}
 				</Grid>
 			</Grid>
 		);

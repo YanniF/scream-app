@@ -14,6 +14,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import MyButton from '../../util/MyButton';
 import EditDetails from './EditDetails';
 import { logoutUser, uploadImage } from '../../store/actions/userActions';
+import ProfileSkeleton from '../../util/ProfileSkeleton';
 
 const styles = (theme) => ({
 	...theme.properties,
@@ -100,7 +101,7 @@ class Profile extends Component {
 				</div>
 			</Paper>
 		) : (
-			<div />
+			<ProfileSkeleton />
 		);
 
 		return profileMarkup;

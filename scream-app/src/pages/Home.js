@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Scream from '../components/screams/Scream';
 import Profile from '../components/profile/Profile';
+import ScreamSkeleton from '../util/ScreamSkeleton';
 import { getScreams } from '../store/actions/dataActions';
 
 class Home extends Component {
@@ -18,7 +19,7 @@ class Home extends Component {
 		return (
 			<Grid container spacing={4}>
 				<Grid item sm={8} xs={12}>
-					{!loading ? screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) : <p>Loading...</p>}
+					{!loading ? screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) : <ScreamSkeleton />}
 				</Grid>
 				<Grid item sm={4} xs={12}>
 					<Profile />
