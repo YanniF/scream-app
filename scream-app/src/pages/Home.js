@@ -16,7 +16,7 @@ class Home extends Component {
 		const { screams, loading } = this.props.data;
 
 		return (
-			<Grid container spacing={3}>
+			<Grid container spacing={4}>
 				<Grid item sm={8} xs={12}>
 					{!loading ? screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) : <p>Loading...</p>}
 				</Grid>

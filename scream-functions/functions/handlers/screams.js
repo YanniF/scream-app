@@ -15,6 +15,8 @@ exports.getAllScreams = (req, res) => {
 					userHandle: doc.data().userHandle,
 					createdAt: doc.data().createdAt,
 					userImage: doc.data().userImage,
+					commentCount: doc.data().commentCount,
+					likeCount: doc.data().likeCount,
 				});
 			});
 
@@ -25,7 +27,7 @@ exports.getAllScreams = (req, res) => {
 
 exports.postScream = (req, res) => {
 	if (req.body.body.trim() === '') {
-		return res.status(400).json({ error: 'Must not be empty' });
+		return res.status(400).json({ body: 'Must not be empty' });
 	}
 
 	const newScream = {
@@ -180,6 +182,19 @@ exports.likeScream = (req, res) => {
 						return screamDocument.update({ likeCount: screamData.likeCount });
 					})
 					.then(() => {
+						return db
+							.collection('comments')
+							.orderBy('createdAt', 'desc')
+							.where('screamId', '==', req.params.screamId)
+							.get();
+					})
+					.then((data) => {
+						screamData.comments = [];
+
+						data.forEach((doc) => {
+							screamData.comments.push(doc.data());
+						});
+
 						return res.json(screamData);
 					});
 			}
@@ -229,6 +244,19 @@ exports.unlikeScream = (req, res) => {
 						return screamDocument.update({ likeCount: screamData.likeCount });
 					})
 					.then(() => {
+						return db
+							.collection('comments')
+							.orderBy('createdAt', 'desc')
+							.where('screamId', '==', req.params.screamId)
+							.get();
+					})
+					.then((data) => {
+						screamData.comments = [];
+
+						data.forEach((doc) => {
+							screamData.comments.push(doc.data());
+						});
+
 						res.json(screamData);
 					});
 			}

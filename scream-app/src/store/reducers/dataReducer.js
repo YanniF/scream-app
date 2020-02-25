@@ -59,14 +59,21 @@ export default function(state = initialState, action) {
 				...state,
 				screams: [ action.payload, ...state.screams ],
 			};
-		case SUBMIT_COMMENT:
+		case SUBMIT_COMMENT: {
+			let commentIndex = state.screams.findIndex((scream) => scream.screamId === action.payload.screamId);
+
 			return {
 				...state,
 				scream: {
 					...state.scream,
 					comments: [ action.payload, ...state.scream.comments ],
+					commentCount: state.scream.commentCount + 1,
 				},
+				screams: state.screams.map(
+					(scream, index) => (index === commentIndex ? { ...scream, commentCount: scream.commentCount + 1 } : scream),
+				),
 			};
+		}
 		default:
 			return state;
 	}
