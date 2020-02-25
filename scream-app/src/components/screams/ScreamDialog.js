@@ -12,8 +12,8 @@ import ChatIcon from '@material-ui/icons/Chat';
 
 import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
-// import Comments from './Comments';
-// import CommentForm from './CommentForm';
+import Comments from './Comments';
+import CommentForm from './CommentForm';
 
 import { getScream, clearErrors } from '../../store/actions/dataActions';
 
@@ -101,7 +101,7 @@ class ScreamDialog extends Component {
 					</Typography>
 					<hr className={classes.invisibleSeparator} />
 					<Typography variant="body2" color="textSecondary">
-						{dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
+						{dayjs(createdAt).format('h:mm a, DD MMMM YYYY')}
 					</Typography>
 					<hr className={classes.invisibleSeparator} />
 					<Typography variant="body1">{body}</Typography>
@@ -113,8 +113,8 @@ class ScreamDialog extends Component {
 					<span>{commentCount} comments</span>
 				</Grid>
 				<hr className={classes.visibleSeparator} />
-				{/* <CommentForm screamId={screamId} />
-        <Comments comments={comments} /> */}
+				<CommentForm screamId={screamId} />
+				<Comments comments={comments} />
 			</Grid>
 		);
 
